@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>เว็บไซต์บันทึกรายรับรายจ่าย</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -65,6 +66,14 @@
       font-weight: bold;
       font-size: 1.2rem;
     }
+    .delete-btn {
+      background: red;
+      color: white;
+      padding: 0.2rem 0.5rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -100,6 +109,7 @@
           <th>ประเภท</th>
           <th>จำนวนเงิน (฿)</th>
           <th>คำอธิบาย</th>
+          <th>ลบ</th>
         </tr>
       </thead>
       <tbody>
@@ -110,10 +120,17 @@
     <div class="summary">
       คงเหลือ: <span id="balance">0</span> ฿
     </div>
+
+    <canvas id="chart" width="400" height="200"></canvas>
   </div>
 
   <script>
-    let entries = [];
+    let entries = JSON.parse(localStorage.getItem('entries')) || [];
+    let chart;
+
+    function saveEntries() {
+      localStorage.setItem('entries', JSON.stringify(entries));
+    }
 
     function addEntry() {
       const type = document.getElementById('type').value;
@@ -126,9 +143,17 @@
       }
 
       entries.push({ type, amount, description });
+      saveEntries();
+
       document.getElementById('amount').value = '';
       document.getElementById('description').value = '';
 
+      renderEntries();
+    }
+
+    function deleteEntry(index) {
+      entries.splice(index, 1);
+      saveEntries();
       renderEntries();
     }
 
@@ -137,22 +162,53 @@
       tableBody.innerHTML = '';
 
       let balance = 0;
+      let incomeTotal = 0;
+      let expenseTotal = 0;
 
-      entries.forEach(entry => {
+      entries.forEach((entry, index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
           <td class="${entry.type}">${entry.type === 'income' ? 'รายรับ' : 'รายจ่าย'}</td>
           <td>${entry.amount.toFixed(2)}</td>
           <td>${entry.description}</td>
+          <td><button class="delete-btn" onclick="deleteEntry(${index})">ลบ</button></td>
         `;
         tableBody.appendChild(row);
 
-        balance += entry.type === 'income' ? entry.amount : -entry.amount;
+        if (entry.type === 'income') {
+          incomeTotal += entry.amount;
+          balance += entry.amount;
+        } else {
+          expenseTotal += entry.amount;
+          balance -= entry.amount;
+        }
       });
 
       document.getElementById('balance').textContent = balance.toFixed(2);
+      updateChart(incomeTotal, expenseTotal);
     }
+
+    function updateChart(income, expense) {
+      const ctx = document.getElementById('chart').getContext('2d');
+      if (chart) chart.destroy();
+      chart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['รายรับ', 'รายจ่าย'],
+          datasets: [{
+            data: [income, expense],
+            backgroundColor: ['green', 'red']
+          }]
+        },
+        options: {
+          responsive: true
+        }
+      });
+    }
+
+    renderEntries();
   </script>
 
 </body>
 </html>
+
