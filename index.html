@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>เว็บไซต์บันทึกรายรับรายจ่าย</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #0077cc;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.2rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background: #0077cc;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
+    button:hover {
+      background: #005fa3;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+    }
+    th, td {
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    .income { color: green; }
+    .expense { color: red; }
+    .summary {
+      margin-top: 1rem;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>เว็บไซต์บันทึกรายรับรายจ่าย</h1>
+  </header>
+
+  <div class="container">
+    <div class="form-group">
+      <label>ประเภท</label>
+      <select id="type">
+        <option value="income">รายรับ</option>
+        <option value="expense">รายจ่าย</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>จำนวนเงิน (฿)</label>
+      <input type="number" id="amount" placeholder="เช่น 500">
+    </div>
+
+    <div class="form-group">
+      <label>คำอธิบาย</label>
+      <input type="text" id="description" placeholder="เช่น ค่าอาหาร, เงินเดือน">
+    </div>
+
+    <button onclick="addEntry()">เพิ่มรายการ</button>
+
+    <table id="entriesTable">
+      <thead>
+        <tr>
+          <th>ประเภท</th>
+          <th>จำนวนเงิน (฿)</th>
+          <th>คำอธิบาย</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Entries will appear here -->
+      </tbody>
+    </table>
+
+    <div class="summary">
+      คงเหลือ: <span id="balance">0</span> ฿
+    </div>
+  </div>
+
+  <script>
+    let entries = [];
+
+    function addEntry() {
+      const type = document.getElementById('type').value;
+      const amount = parseFloat(document.getElementById('amount').value);
+      const description = document.getElementById('description').value;
+
+      if (isNaN(amount) || amount <= 0) {
+        alert('กรุณากรอกจำนวนเงินให้ถูกต้อง');
+        return;
+      }
+
+      entries.push({ type, amount, description });
+      document.getElementById('amount').value = '';
+      document.getElementById('description').value = '';
+
+      renderEntries();
+    }
+
+    function renderEntries() {
+      const tableBody = document.querySelector('#entriesTable tbody');
+      tableBody.innerHTML = '';
+
+      let balance = 0;
+
+      entries.forEach(entry => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td class="${entry.type}">${entry.type === 'income' ? 'รายรับ' : 'รายจ่าย'}</td>
+          <td>${entry.amount.toFixed(2)}</td>
+          <td>${entry.description}</td>
+        `;
+        tableBody.appendChild(row);
+
+        balance += entry.type === 'income' ? entry.amount : -entry.amount;
+      });
+
+      document.getElementById('balance').textContent = balance.toFixed(2);
+    }
+  </script>
+
+</body>
+</html>
