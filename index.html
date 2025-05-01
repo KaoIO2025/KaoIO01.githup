@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>บันทึกรายรับรายจ่าย</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center p-4">
+  <h1 class="text-3xl font-bold mb-4">📒 บันทึกรายรับ-รายจ่าย</h1>
+
+  <!-- Filter Buttons -->
+  <div class="flex justify-center space-x-4 mb-4">
+    <button onclick="filterTransactions('income')" class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600">
+      ดูรายรับ
+    </button>
+    <button onclick="filterTransactions('expense')" class="w-full bg-red-500 text-white p-2 rounded hover:bg-red-600">
+      ดูรายจ่าย
+    </button>
+    <button onclick="filterTransactions('all')" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+      ดูทั้งหมด
+    </button>
+  </div>
+
+  <!-- Input Form -->
+  <div class="bg-white p-4 rounded-2xl shadow-md w-full max-w-md mb-6">
+    <input id="desc" type="text" placeholder="รายละเอียด" class="w-full p-2 border rounded mb-2">
+    <input id="amount" type="number" placeholder="จำนวนเงิน (+/-)" class="w-full p-2 border rounded mb-2">
+    <button onclick="addTransaction()" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+      <i class="fas fa-plus-circle"></i> เพิ่มรายการ
+    </button>
+  </div>
+
+  <!-- Transaction List -->
+  <div class="bg-white p-4 rounded-2xl shadow-md w-full max-w-md">
+    <h2 class="text-xl font-semibold mb-2">📄 รายการทั้งหมด</h2>
+    <ul id="list" class="space-y-2"></ul>
+  </div>
+
+  <!-- Balance -->
+  <div class="bg-green-100 p-4 rounded-2xl shadow-md w-full max-w-md mt-6 text-center">
+    <h2 class="text-xl font-semibold">💰 ยอดคงเหลือ</h2>
+    <p id="balance" class="text-2xl font-bold mt-2">0 บาท</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
