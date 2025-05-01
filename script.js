@@ -56,5 +56,14 @@ function removeTransaction(index) {
   renderList();
 }
 
+function clearTransactions() {
+  if (confirm('ต้องการลบรายการทั้งหมดหรือไม่?')) {
+    transactions = [];
+    filteredTransactions = transactions;
+    saveTransactions();
+    renderList();
+  }
+}
+
 // โหลดข้อมูลเมื่อเปิดเว็บ
 renderList();
