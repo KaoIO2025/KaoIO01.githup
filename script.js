@@ -1,5 +1,7 @@
+## 3. `script.js`
+```javascript
 let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
-let filteredTransactions = transactions;  // ใช้เก็บรายการที่กรองแล้ว
+let filteredTransactions = transactions;
 
 function saveTransactions() {
   localStorage.setItem('transactions', JSON.stringify(transactions));
@@ -14,7 +16,7 @@ function addTransaction() {
     saveTransactions();
     document.getElementById('desc').value = '';
     document.getElementById('amount').value = '';
-    filterTransactions('all');  // รีเซ็ตการกรองกลับไปดูทั้งหมด
+    filterTransactions('all');
   } else {
     alert('กรุณากรอกข้อมูลให้ครบ');
   }
@@ -53,7 +55,7 @@ function renderList() {
 function removeTransaction(index) {
   transactions.splice(index, 1);
   saveTransactions();
-  filterTransactions('all'); // อัพเดตลิสต์และยอดหลังลบ
+  filterTransactions('all');
 }
 
 function clearTransactions() {
@@ -65,6 +67,8 @@ function clearTransactions() {
   }
 }
 
-// โหลดข้อมูลเมื่อเปิดเว็บ (ดูทั้งหมด)
+// โหลดข้อมูลเมื่อเปิดเว็บ
 filterTransactions('all');
+```
+
 
