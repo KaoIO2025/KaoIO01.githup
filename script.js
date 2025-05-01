@@ -14,7 +14,7 @@ function addTransaction() {
     saveTransactions();
     document.getElementById('desc').value = '';
     document.getElementById('amount').value = '';
-    renderList();
+    filterTransactions('all');  // รีเซ็ตการกรองกลับไปดูทั้งหมด
   } else {
     alert('กรุณากรอกข้อมูลให้ครบ');
   }
@@ -53,7 +53,7 @@ function renderList() {
 function removeTransaction(index) {
   transactions.splice(index, 1);
   saveTransactions();
-  renderList();
+  filterTransactions('all'); // อัพเดตลิสต์และยอดหลังลบ
 }
 
 function clearTransactions() {
@@ -65,5 +65,6 @@ function clearTransactions() {
   }
 }
 
-// โหลดข้อมูลเมื่อเปิดเว็บ
-renderList();
+// โหลดข้อมูลเมื่อเปิดเว็บ (ดูทั้งหมด)
+filterTransactions('all');
+
