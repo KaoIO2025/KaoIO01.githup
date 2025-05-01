@@ -1,65 +1,91 @@
+/* style.css */
+
 /* ตั้งค่าพื้นฐานสำหรับตัวเว็บไซต์ */
 body {
-    font-family: 'Arial', sans-serif;
-  }
-  
-  /* ให้ input และปุ่มมีขนาดที่เหมาะสม */
-  input, button {
-    font-size: 1rem;
-  }
-  
-  /* ให้ทุกปุ่มมีมุมโค้งมน */
-  button {
-    border-radius: 0.5rem;
-  }
-  
-  /* สไตล์ปุ่มเพิ่มรายการ */
-  button:hover {
-    background-color: #3182ce; /* สีเข้มขึ้นเมื่อ hover */
-    cursor: pointer;
-  }
-  
-  /* สไตล์รายการ (เช่น รายรับ/รายจ่าย) */
-  li {
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  /* เมื่อ hover บนรายการให้มีสีพื้นหลังที่ชัดขึ้น */
-  li:hover {
-    background-color: #f3f4f6;
-  }
-  
-  /* สไตล์ของยอดคงเหลือ */
-  #balance {
-    font-size: 2rem;
-    font-weight: bold;
-  }
-  
-  /* ตั้งค่าผลลัพธ์ของยอดคงเหลือในกรณีที่เป็นบวก */
-  .bg-green-100 {
-    background-color: #d9f99d; /* สีเขียวอ่อนสำหรับรายรับ */
-  }
-  
-  /* ตั้งค่าผลลัพธ์ของยอดคงเหลือในกรณีที่เป็นลบ */
-  .bg-red-100 {
-    background-color: #fef2f2; /* สีแดงอ่อนสำหรับรายจ่าย */
-  }
-  
-  /* สไตล์ของฟอร์มการกรอกข้อมูล */
-  input[type="text"], input[type="number"] {
-    border: 1px solid #ddd;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-  }
-  
-  /* เพิ่มระยะห่างระหว่างฟอร์มและปุ่ม */
-  input[type="text"], input[type="number"] {
-    margin-bottom: 1rem;
-  }
-  
-  /* สไตล์ของ container ที่ใช้สำหรับแสดงรายการทั้งหมด */
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
+  font-family: 'Arial', sans-serif;
+}
+
+/* ให้ input และปุ่มมีขนาดที่เหมาะสม */
+input,
+button {
+  font-size: 1rem;
+}
+
+/* ให้ทุกปุ่มมีมุมโค้งมน */
+button {
+  border-radius: 0.5rem;
+}
+
+/* สไตล์ปุ่มทั่วไปเมื่อ hover */
+button:hover {
+  background-color: #3182ce; /* สีเข้มขึ้นเมื่อ hover */
+  cursor: pointer;
+}
+
+/* สไตล์รายการ (เช่น รายรับ/รายจ่าย) */
+li {
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* เมื่อ hover บนรายการให้มีสีพื้นหลังที่ชัดขึ้น */
+li:hover {
+  background-color: #f3f4f6;
+}
+
+/* สไตล์ของยอดคงเหลือ */
+#balance {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* ตั้งค่าผลลัพธ์ของยอดคงเหลือในกรณีที่เป็นบวก */
+.bg-green-100 {
+  background-color: #d9f99d; /* สีเขียวอ่อนสำหรับรายรับ */
+}
+
+/* ตั้งค่าผลลัพธ์ของยอดคงเหลือในกรณีที่เป็นลบ */
+.bg-red-100 {
+  background-color: #fef2f2; /* สีแดงอ่อนสำหรับรายจ่าย */
+}
+
+/* สไตล์ของฟอร์มการกรอกข้อมูล */
+input[type="text"],
+input[type="number"] {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* สไตล์ของ container ที่ใช้สำหรับแสดงรายการทั้งหมด */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* ============================= */
+/* ปุ่มลบทั้งหมด (Clear All) */
+/* ============================= */
+.btn-clear-all {
+  background-color: #e53e3e;                 /* สีแดงเข้ม */
+  color: #ffffff;                            /* ข้อความสีขาว */
+  padding: 0.75rem 1.25rem;                  /* ขนาดภายใน */
+  border: none;                              /* เอาเส้นขอบออก */
+  border-radius: 0.75rem;                    /* มุมโค้งมน */
+  font-size: 1rem;                           /* ขนาดตัวอักษร */
+  font-weight: 600;                          /* ตัวหนาขึ้น */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);   /* เงาอ่อนๆ */
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* สถานะ hover ปุ่มลบทั้งหมด */
+.btn-clear-all:hover {
+  background-color: #c53030; /* เข้มขึ้น */
+  transform: translateY(-2px); /* ยกขึ้นเล็กน้อย */
+}
+
+/* สถานะ active (กดปุ่ม) */
+.btn-clear-all:active {
+  background-color: #9b2c2c;
+  transform: translateY(0);
+}
