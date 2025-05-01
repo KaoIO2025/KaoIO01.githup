@@ -10,7 +10,7 @@
     <div class="container">
         <h1>บันทึกรายรับรายจ่าย</h1>
 
-        <!-- Form for adding income and expense -->
+        <!-- Form -->
         <form id="transaction-form">
             <label for="transaction-type">ประเภท</label>
             <select id="transaction-type" required>
@@ -24,10 +24,13 @@
             <label for="description">รายละเอียด</label>
             <input type="text" id="description" placeholder="ระบุรายละเอียด" required>
 
+            <label for="date">วันที่</label>
+            <input type="date" id="date" required>
+
             <button type="submit">บันทึก</button>
         </form>
 
-        <!-- List of transactions -->
+        <!-- Table -->
         <h2>รายการบันทึก</h2>
         <table id="transaction-list">
             <thead>
@@ -36,21 +39,22 @@
                     <th>จำนวนเงิน</th>
                     <th>รายละเอียด</th>
                     <th>วันที่</th>
+                    <th>ลบ</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- รายการจะถูกเพิ่มที่นี่ -->
-            </tbody>
+            <tbody></tbody>
         </table>
 
         <div id="summary">
             <h3>ยอดรวม</h3>
-            <p>รายรับ: <span id="total-income">0</span> บาท</p>
-            <p>รายจ่าย: <span id="total-expense">0</span> บาท</p>
-            <p>ยอดรวมสุทธิ: <span id="net-total">0</span> บาท</p>
+            <p>รายรับ: <span id="total-income">0.00</span> บาท</p>
+            <p>รายจ่าย: <span id="total-expense">0.00</span> บาท</p>
+            <p>ยอดรวมสุทธิ: <span id="net-total">0.00</span> บาท</p>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
+
+   
